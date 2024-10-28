@@ -31,7 +31,7 @@ public class Card {
   // loads all the cards from a file. The file should be in the following format:
   // 5 strings, the name, and then the string value of the attack in each direction
   // name,attackN,attackS,attackE,attackW
-  public List<Card> loadCardsFromFile(String filePath) throws FileNotFoundException {
+  public static List<Card> loadCardsFromFile(String filePath) throws FileNotFoundException {
     List<Card> cards = new ArrayList<>();
 
     // read the file and create a card for each line
