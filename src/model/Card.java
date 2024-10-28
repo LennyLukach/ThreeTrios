@@ -40,10 +40,23 @@ public class Card {
     while (scanner.hasNextLine()) {
       String line = scanner.nextLine();
       String[] values = line.split(" ");
+
+      if (values.length != 5) { // there must be 5 values, else format is wrong
+        throw new IllegalArgumentException("Invalid file format");
+      }
+
       String name = values[0];
       List<Integer> attackValues = new ArrayList<>();
       for (int i = 1; i < values.length; i++) {
-        attackValues.add(Integer.parseInt(values[i]));
+        if (values[i].equals("A")) {
+          attackValues.add(10);
+        }
+        else if (Integer.parseInt(values[i]) < 0 && Integer.parseInt(values[i]) > 10) {
+          attackValues.add(Integer.parseInt(values[i]));
+        }
+        else {
+          throw new IllegalArgumentException("Invalid attack value"); // make sure the value is between 1-9 or A
+        }
       }
       cards.add(new Card(name, attackValues));
     }
