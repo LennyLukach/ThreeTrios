@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * test change for git commit
+ */
 public class Card {
   private final String name;
   private final List<Integer> attackValues;
