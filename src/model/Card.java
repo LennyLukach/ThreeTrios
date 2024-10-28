@@ -15,7 +15,7 @@ public class Card {
     this.attackValues = values;
   }
 
-  // get the name of a card
+  // get the name of a card...
   public String getName() {
     return name;
   }
