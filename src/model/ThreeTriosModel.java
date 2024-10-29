@@ -152,15 +152,47 @@ public class ThreeTriosModel implements IThreeTrioModel {
   }
 
   public boolean isGameOver() {
+    for (int row = 0; row < grid.getGrid().length; row++) {
+      for (int col = 0; col < grid.getGrid()[0].length; col++) {
+        if (grid.getCard(row, col) == null) {
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
-  public void determineWinner() {
+  public PlayerColor determineWinner() {
+    int redCount = 0;
+    int blueCount = 0;
+    PlayerColor winner = null;
 
+    for (int row = 0; row < grid.getGrid().length; row++) {
+      for (int col = 0; col < grid.getGrid()[0].length; col++) {
+        if (grid.getCard(row, col).getColor() == PlayerColor.RED) {
+          redCount++;
+        } else if (grid.getCard(row, col).getColor() == PlayerColor.BLUE) {
+          blueCount++;
+        }
+      }
+    }
+
+    redCount += redHand.size();
+    blueCount += blueHand.size();
+
+    if (redCount > blueCount) {
+      winner = PlayerColor.RED;
+    } else if (blueCount > redCount) {
+      winner = PlayerColor.BLUE;
+    }
+
+    return winner;
   }
+
 
   // i changed setColor to return a card so
   // we could draw to the hand and set the color of the
-  // card at the same time. lmk if you want to change this
+  // card at the same time.
   private void fillHands() {
     while (!deck.getDeck().isEmpty()) {
       redHand.add(deck.draw().setColor(PlayerColor.RED));

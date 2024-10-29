@@ -49,5 +49,5 @@ public interface IThreeTrioModel {
    * This includes all the cards they own on the grid and the cards
    * they have remaining in their hand.
    */
-  public void determineWinner();
+  public PlayerColor determineWinner();
 }
