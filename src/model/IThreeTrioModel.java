@@ -29,8 +29,8 @@ public interface IThreeTrioModel {
    * and this new card now does battle with all of its adjacent cards.
    * If the other player's card wins the battle, both cards stay the same.
    *
-   * @param row row index of card placed
-   * @param col column index of card placed
+   * @param row   row index of card placed
+   * @param col   column index of card placed
    * @param color color of player whose turn it is
    */
   public void battle(int row, int col, PlayerColor color);
