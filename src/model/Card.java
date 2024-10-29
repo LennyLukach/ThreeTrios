@@ -30,8 +30,16 @@ public class Card {
   }
 
   // set the color of a card
-  public void setColor(PlayerColor color) {
+
+  /**
+   * Sets color of card to provided player's color.
+   *
+   * @param color given player's color
+   * @return the card
+   */
+  public Card setColor(PlayerColor color) {
     this.color = color;
+    return this;
   }
 
 }

@@ -5,7 +5,6 @@ import java.util.List;
 
 /**
  * This is the implementation for the model for the game Three Trios.
- *
  */
 public class ThreeTriosModel {
 
@@ -51,6 +50,16 @@ public class ThreeTriosModel {
     fillHands();
   }
 
+  /**
+   * Places a card of the player's color onto a valid cell on the grid.
+   * Cards cannot be placed on holes, which vary depending on the grid.
+   * Cards can only be played to grid during placing state.
+   *
+   * @param row       row index of grid cell to be played to
+   * @param col       column index of grid cell to be played to
+   * @param handIndex index of card in hand
+   * @param color     color of player whose turn it is
+   */
   public void placeCard(int row, int col, int handIndex, PlayerColor color) {
     if (gameState != GameState.PLACING) {
       throw new IllegalStateException("Game is not in placing stage.");
@@ -72,7 +81,7 @@ public class ThreeTriosModel {
     }
   }
 
-  public void placeCardHelper(int row, int col, List<Card> hand, int handIndex) {
+  private void placeCardHelper(int row, int col, List<Card> hand, int handIndex) {
     if (hand.isEmpty()) {
       throw new IllegalArgumentException("Hand is empty.");
     }
@@ -102,11 +111,13 @@ public class ThreeTriosModel {
 
   }
 
+  // i changed setColor to return a card so
+  // we could draw to the hand and set the color of the
+  // card at the same time. lmk if you want to change this
   private void fillHands() {
     while (!deck.getDeck().isEmpty()) {
-      redHand.add(deck.draw());
-      blueHand.add(deck.draw());
+      redHand.add(deck.draw().setColor(PlayerColor.RED));
+      blueHand.add(deck.draw().setColor(PlayerColor.BLUE));
     }
   }
-
 }
