@@ -7,7 +7,7 @@ public interface IThreeTrioModel {
    *
    * @throws IllegalArgumentException if the deck size is not even or the grid size is not odd
    */
-  public void startGame();
+  void startGame();
 
   /**
    * Places a card of the player's color onto a valid cell on the grid.
@@ -19,7 +19,7 @@ public interface IThreeTrioModel {
    * @param handIndex index of card in hand
    * @param color     color of player whose turn it is
    */
-  public void placeCard(int row, int col, int handIndex, PlayerColor color);
+  void placeCard(int row, int col, int handIndex, PlayerColor color);
 
   /**
    * Battle happens after a player places a card on the grid.
@@ -33,7 +33,7 @@ public interface IThreeTrioModel {
    * @param col   column index of card placed
    * @param color color of player whose turn it is
    */
-  public void battle(int row, int col, PlayerColor color);
+  void battle(int row, int col, PlayerColor color);
 
   /**
    * Checks if the game is over.
@@ -41,7 +41,7 @@ public interface IThreeTrioModel {
    *
    * @return true if game is over, false if not
    */
-  public boolean isGameOver();
+  boolean isGameOver();
 
   /**
    * Checks which player won.
@@ -49,5 +49,7 @@ public interface IThreeTrioModel {
    * This includes all the cards they own on the grid and the cards
    * they have remaining in their hand.
    */
-  public PlayerColor determineWinner();
+  PlayerColor determineWinner();
+
+
 }
