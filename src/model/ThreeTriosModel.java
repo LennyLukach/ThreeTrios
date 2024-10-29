@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * This is the implementation for the model for the game Three Trios.
  */
-public class ThreeTriosModel {
+public class ThreeTriosModel implements IThreeTrioModel {
 
   private final Player redPlayer;
   private final Player bluePlayer;
@@ -31,12 +31,6 @@ public class ThreeTriosModel {
     gameState = GameState.NOT_STARTED;
   }
 
-  /**
-   * Starts the game by checking exceptions & initializing the hands, shuffling deck,
-   * and making the grid
-   *
-   * @throws IllegalArgumentException if the deck size is not even or the grid size is not odd
-   */
   public void startGame() {
     if (gameState != GameState.NOT_STARTED) { // if the game is in any other state besides not started, throw error
       throw new IllegalStateException("Game is not ready to start.");
@@ -50,16 +44,6 @@ public class ThreeTriosModel {
     fillHands();
   }
 
-  /**
-   * Places a card of the player's color onto a valid cell on the grid.
-   * Cards cannot be placed on holes, which vary depending on the grid.
-   * Cards can only be played to grid during placing state.
-   *
-   * @param row       row index of grid cell to be played to
-   * @param col       column index of grid cell to be played to
-   * @param handIndex index of card in hand
-   * @param color     color of player whose turn it is
-   */
   public void placeCard(int row, int col, int handIndex, PlayerColor color) {
     if (gameState != GameState.PLACING) {
       throw new IllegalStateException("Game is not in placing stage.");
@@ -97,14 +81,77 @@ public class ThreeTriosModel {
     hand.remove(handIndex);
   }
 
-  public void battle() {
+  public void battle(int row, int col, PlayerColor color) {
     if (gameState != GameState.BATTLE) {
       throw new IllegalStateException("Game is not in battle stage.");
     }
+
+    // check north
+    attackNorth(row, col, color);
+
+    // check south
+    attackSouth(row, col, color);
+
+    // check east
+    attackEast(row, col, color);
+
+    // check west
+    attackWest(row, col, color);
   }
 
-  public void isGameOver() {
+  private void attackNorth(int row, int col, PlayerColor color) {
+    boolean cardIsOpponents = grid.getCard(row - 1, col).getColor() != color;
+    boolean cardExists = grid.getCard(row - 1, col) != null;
+    if (cardIsOpponents && cardExists) {
+      int attack = grid.getCard(row, col).getAttack(Direction.NORTH);
+      int defense = grid.getCard(row - 1, col).getAttack(Direction.SOUTH);
+      if (attack > defense) {
+        grid.getCard(row - 1, col).setColor(color);
+        battle(row - 1, col, color);
+      }
+    }
+  }
 
+  private void attackSouth(int row, int col, PlayerColor color) {
+    boolean cardIsOpponents = grid.getCard(row + 1, col).getColor() != color;
+    boolean cardExists = grid.getCard(row + 1, col) != null;
+    if (cardIsOpponents && cardExists) {
+      int attack = grid.getCard(row, col).getAttack(Direction.SOUTH);
+      int defense = grid.getCard(row - 1, col).getAttack(Direction.NORTH);
+      if (attack > defense) {
+        grid.getCard(row + 1, col).setColor(color);
+        battle(row + 1, col, color);
+      }
+    }
+  }
+
+  private void attackEast(int row, int col, PlayerColor color) {
+    boolean cardIsOpponents = grid.getCard(row, col + 1).getColor() != color;
+    boolean cardExists = grid.getCard(row, col + 1) != null;
+    if (cardIsOpponents && cardExists) {
+      int attack = grid.getCard(row, col).getAttack(Direction.EAST);
+      int defense = grid.getCard(row, col + 1).getAttack(Direction.WEST);
+      if (attack > defense) {
+        grid.getCard(row, col + 1).setColor(color);
+        battle(row, col + 1, color);
+      }
+    }
+  }
+
+  private void attackWest(int row, int col, PlayerColor color) {
+    boolean cardIsOpponents = grid.getCard(row, col - 1).getColor() != color;
+    boolean cardExists = grid.getCard(row, col - 1) != null;
+    if (cardIsOpponents && cardExists) {
+      int attack = grid.getCard(row, col).getAttack(Direction.WEST);
+      int defense = grid.getCard(row, col - 1).getAttack(Direction.EAST);
+      if (attack > defense) {
+        grid.getCard(row, col - 1).setColor(color);
+        battle(row, col - 1, color);
+      }
+    }
+  }
+
+  public boolean isGameOver() {
   }
 
   public void determineWinner() {

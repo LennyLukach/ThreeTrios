@@ -20,8 +20,8 @@ public class Card {
   }
 
   // get the attack value of a card by putting index for direction: N0, S1, E2, W3
-  public int getAttack(int direction) {
-    return attackValues.get(direction);
+  public int getAttack(Direction direction) {
+    return attackValues.get(direction.ordinal());
   }
 
   // get the color of a card
