@@ -2,7 +2,7 @@ package model;
 
 import java.util.List;
 
-public interface IThreeTrioModel {
+public interface IThreeTriosModel {
   /**
    * Starts the game by checking exceptions & initializing the hands, shuffling deck,
    * and making the grid
@@ -33,7 +33,6 @@ public interface IThreeTrioModel {
    *
    * @param row   row index of card placed
    * @param col   column index of card placed
-   * @param color color of player whose turn it is
    */
   void battle(int row, int col);
 

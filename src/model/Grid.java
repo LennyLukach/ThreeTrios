@@ -8,12 +8,16 @@ import java.util.Scanner;
  * Represents the grid of the game.
  */
 public class Grid {
-  private GridCell[][] grid;
+  private final GridCell[][] grid;
 
   /**
    * Constructs a Grid object from a file.
-   * @param fileGrid
-   * @throws FileNotFoundException
+   * The first two ints in the file represent the number of rows and columns.
+   * Holes in a grid file are represented with X,
+   * and card cells are represented with C.
+   *
+   * @param fileGrid takes a file representation of a grid
+   * @throws FileNotFoundException if the file is not formatted correctly
    */
   public Grid(String fileGrid) throws FileNotFoundException {
     this.grid = loadGridFromFile(fileGrid);
@@ -41,11 +45,9 @@ public class Grid {
       for (int colIdx = 0; colIdx < cols; colIdx++) {
         if (chars[colIdx] == 'X') {
           grid[rowIdx][colIdx] = new GridCell(true);
-        }
-        else if (chars[colIdx] == 'C') {
+        } else if (chars[colIdx] == 'C') {
           grid[rowIdx][colIdx] = new GridCell(false);
-        }
-        else {
+        } else {
           throw new IllegalArgumentException("Invalid character in grid file");
         }
       }
@@ -55,7 +57,8 @@ public class Grid {
 
   /**
    * Returns the grid.
-   * @return
+   *
+   * @return an array of grid cells
    */
   public GridCell[][] getGrid() {
     return grid;
@@ -63,9 +66,10 @@ public class Grid {
 
   /**
    * Sets the card in the grid cell.
-   * @param row
-   * @param col
-   * @param card
+   *
+   * @param row  the row index of the cell
+   * @param col  the column index of the cell
+   * @param card the card being played
    */
   public void setCard(int row, int col, Card card) {
     grid[row][col].setCard(card);
@@ -73,9 +77,10 @@ public class Grid {
 
   /**
    * Returns the card in the grid cell.
-   * @param row
-   * @param col
-   * @return
+   *
+   * @param row the row index of the cell
+   * @param col the column index of the cell
+   * @return the card in the cell
    */
   public Card getCard(int row, int col) {
     Card card;
@@ -89,9 +94,10 @@ public class Grid {
 
   /**
    * Checks if the grid cell is a hole.
-   * @param row
-   * @param col
-   * @return
+   *
+   * @param row the row index of the cell
+   * @param col the column index of the cell
+   * @return true if the cell is a hole and false if not
    */
   public boolean isHole(int row, int col) {
     try {
@@ -103,7 +109,8 @@ public class Grid {
 
   /**
    * Returns the number of card cells in the grid.
-   * @return
+   *
+   * @return the number of cells that are NOT holes
    */
   public int getNumCardCells() {
     int numCardCells = 0;

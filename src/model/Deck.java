@@ -16,22 +16,16 @@ public class Deck {
   private final List<Card> deck;
 
   /**
-   * Constructs a deck of cards from a list of cards.
-   * @param filepath
-   * @throws FileNotFoundException
+   * Constructs a deck of cards from a given file representation of cards.
+   *
+   * @param filepath the given file of cards, with a name and 4 numbers
+   * @throws FileNotFoundException if file is not formatted correctly
    */
   public Deck(String filepath) throws FileNotFoundException {
     this.deck = loadCardsFromFile(filepath);
   }
 
-
-  /**
-   * Constructs a deck of cards from a list of cards.
-   * @param filePath
-   * @return
-   * @throws FileNotFoundException
-   */
-  public static List<Card> loadCardsFromFile(String filePath) throws FileNotFoundException {
+  private List<Card> loadCardsFromFile(String filePath) throws FileNotFoundException {
     List<Card> cards = new ArrayList<>();
 
     // read the file and create a card for each line
@@ -53,11 +47,9 @@ public class Deck {
       for (int i = 1; i < values.length; i++) {
         if (values[i].equals("A")) {
           attackValues.add(10);
-        }
-        else if (Integer.parseInt(values[i]) > 0 && Integer.parseInt(values[i]) < 10) {
+        } else if (Integer.parseInt(values[i]) > 0 && Integer.parseInt(values[i]) < 10) {
           attackValues.add(Integer.parseInt(values[i]));
-        }
-        else { // throw exception if the value is not 1-9 or A
+        } else { // throw exception if the value is not 1-9 or A
           throw new IllegalArgumentException("Invalid attack value");
         }
       }
@@ -76,7 +68,8 @@ public class Deck {
 
   /**
    * Returns the deck of cards
-   * @return
+   *
+   * @return a list of cards
    */
   public List<Card> getDeck() {
     return deck;
@@ -84,10 +77,11 @@ public class Deck {
 
   /**
    * Draws a card from the deck
-   * @return
+   *
+   * @return the drawn card
    */
   public Card draw() {
-    return deck.removeFirst();
+    return deck.remove(0);
   }
 
 }

@@ -13,7 +13,8 @@ public class ThreeTriosView {
 
   /**
    * Constructs a ThreeTriosView with the given model.
-   * @param model
+   *
+   * @param model the constructed model
    */
   public ThreeTriosView(ThreeTriosModel model) {
     this.model = model;
@@ -21,7 +22,8 @@ public class ThreeTriosView {
 
   /**
    * Returns a string representation of the game state.
-   * @return
+   *
+   * @return a StringBuilder appended with the current view.
    */
   @Override
   public String toString() {

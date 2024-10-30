@@ -10,7 +10,8 @@ public class GridCell {
 
   /**
    * Constructs a GridCell object.
-   * @param isHole
+   *
+   * @param isHole whether the constructed cell is a hole or not
    */
   public GridCell(boolean isHole) {
     this.isHole = isHole;
@@ -19,7 +20,8 @@ public class GridCell {
 
   /**
    * Checks if the cell is a hole.
-   * @return
+   *
+   * @return returns true if cell is a hole and false if not
    */
   public boolean isHole() {
     return isHole;
@@ -27,7 +29,8 @@ public class GridCell {
 
   /**
    * Gets the card in the cell.
-   * @return
+   *
+   * @return returns the card in the cell specified
    */
   public Card getCard() {
     return card;
@@ -35,7 +38,8 @@ public class GridCell {
 
   /**
    * Sets the card in the cell.
-   * @param card
+   *
+   * @param card the card to be placed in the cell
    */
   public void setCard(Card card) {
     this.card = card;

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is the implementation for the model for the game Three Trios.
+ * This is the implementation of the model for the game Three Trios.
  */
-public class ThreeTriosModel implements IThreeTrioModel {
+public class ThreeTriosModel implements IThreeTriosModel {
 
   private PlayerColor currentPlayer;
   private List<Card> redHand;
@@ -32,13 +32,6 @@ public class ThreeTriosModel implements IThreeTrioModel {
     gameState = GameState.NOT_STARTED;
   }
 
-  /**
-   * Starts the game by filling the hands of the players.
-   * The game state is set to placing.
-   * The deck must have an even number of cards.
-   * The grid must have an odd number of card cells.
-   * The game must be in the not started state.
-   */
   @Override
   public void startGame() {
     if (gameState != GameState.NOT_STARTED) { // if the game is in any other state besides not started, throw error
@@ -54,13 +47,6 @@ public class ThreeTriosModel implements IThreeTrioModel {
     gameState = GameState.PLACING;
   }
 
-  /**
-   * Places a card from the hand into the grid.
-   * @param row       row index of grid cell to be placed
-   * @param col       column index of grid cell to be placed
-   * @param handIndex index of card in hand
-   * @param color     color of player whose turn it is
-   */
   @Override
   public void placeCard(int row, int col, int handIndex, PlayerColor color) {
     if (gameState != GameState.PLACING) {
@@ -100,11 +86,6 @@ public class ThreeTriosModel implements IThreeTrioModel {
     hand.remove(handIndex);
   }
 
-  /**
-   * Battle method that checks the surrounding cells of the card placed.
-   * @param row   row index of card placed
-   * @param col   column index of card placed
-   */
   @Override
   public void battle(int row, int col) {
     if (gameState != GameState.BATTLE) {
@@ -213,11 +194,6 @@ public class ThreeTriosModel implements IThreeTrioModel {
     }
   }
 
-
-  /**
-   * Determines if the game is over.
-   * @return
-   */
   @Override
   public boolean isGameOver() {
     for (int row = 0; row < grid.getGrid().length; row++) {
@@ -230,10 +206,6 @@ public class ThreeTriosModel implements IThreeTrioModel {
     return true;
   }
 
-  /**
-   * Determines the winner of the game.
-   * @return
-   */
   public PlayerColor determineWinner() {
     int redCount = 0;
     int blueCount = 0;
@@ -266,46 +238,26 @@ public class ThreeTriosModel implements IThreeTrioModel {
     return winner;
   }
 
-  /**
-   * Gets the red hand.
-   * @return
-   */
   @Override
   public List<Card> getRedHand() {
     return redHand;
   }
 
-  /**
-   * Gets the blue hand.
-   * @return
-   */
   @Override
   public List<Card> getBlueHand() {
     return blueHand;
   }
 
-  /**
-   * Gets the game state.
-   * @return
-   */
   @Override
   public GameState getGameState() {
     return gameState;
   }
 
-  /**
-   * Gets the grid.
-   * @return
-   */
   @Override
   public Grid getGrid() {
     return this.grid;
   }
 
-  /**
-   * Gets the current player.
-   * @return
-   */
   @Override
   public PlayerColor getCurrentPlayer() {
     return currentPlayer;

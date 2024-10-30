@@ -26,7 +26,8 @@ public class Card {
 
   /**
    * Gets the name of the card.
-   * @return
+   *
+   * @return name
    */
   public String getName() {
     return name;
@@ -34,8 +35,9 @@ public class Card {
 
   /**
    * Gets the attack value of the card in the given direction.
-   * @param direction
-   * @return
+   *
+   * @param direction an Enum direction of either NORTH, SOUTH, EAST, or WEST
+   * @return the index of the direction
    */
   public int getAttack(Direction direction) {
     return attackValues.get(direction.ordinal());
@@ -43,7 +45,8 @@ public class Card {
 
   /**
    * Gets the color of the card.
-   * @return
+   *
+   * @return Either RED or BLUE, depending on who owns the card
    */
   public PlayerColor getColor() {
     return color;
@@ -64,7 +67,7 @@ public class Card {
   /**
    * Returns a string representation of the card.
    *
-   * @return
+   * @return the name and the ints at each direction index
    */
   @Override
   public String toString() {
