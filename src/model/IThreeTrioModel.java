@@ -1,5 +1,7 @@
 package model;
 
+import java.util.List;
+
 public interface IThreeTrioModel {
   /**
    * Starts the game by checking exceptions & initializing the hands, shuffling deck,
@@ -51,5 +53,19 @@ public interface IThreeTrioModel {
    */
   PlayerColor determineWinner();
 
+  /**
+   * Returns a copy of the Red Player's hand.
+   * Altering this list does not affect the list in game.
+   *
+   * @return a copy of the list redHand
+   */
+  List<Card> getRedHand();
 
+  /**
+   * Returns a copy of the Blue Player's hand.
+   * Altering this list does not affect the list in game.
+   *
+   * @return a copy of the list blueHand
+   */
+  List<Card> getBlueHand();
 }

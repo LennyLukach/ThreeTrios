@@ -33,6 +33,7 @@ public class ThreeTriosModel implements IThreeTrioModel {
     gameState = GameState.NOT_STARTED;
   }
 
+  @Override
   public void startGame() {
     if (gameState != GameState.NOT_STARTED) { // if the game is in any other state besides not started, throw error
       throw new IllegalStateException("Game is not ready to start.");
@@ -46,6 +47,7 @@ public class ThreeTriosModel implements IThreeTrioModel {
     fillHands();
   }
 
+  @Override
   public void placeCard(int row, int col, int handIndex, PlayerColor color) {
     if (gameState != GameState.PLACING) {
       throw new IllegalStateException("Game is not in placing stage.");
@@ -83,6 +85,7 @@ public class ThreeTriosModel implements IThreeTrioModel {
     hand.remove(handIndex);
   }
 
+  @Override
   public void battle(int row, int col, PlayerColor color) {
     if (gameState != GameState.BATTLE) {
       throw new IllegalStateException("Game is not in battle stage.");
@@ -160,6 +163,7 @@ public class ThreeTriosModel implements IThreeTrioModel {
   }
 
   // added a check to see  if the card is not a hole, it can be null
+  @Override
   public boolean isGameOver() {
     for (int row = 0; row < grid.getGrid().length; row++) {
       for (int col = 0; col < grid.getGrid()[0].length; col++) {
@@ -171,6 +175,7 @@ public class ThreeTriosModel implements IThreeTrioModel {
     return true;
   }
 
+  @Override
   public PlayerColor determineWinner() {
     int redCount = 0;
     int blueCount = 0;
@@ -196,6 +201,16 @@ public class ThreeTriosModel implements IThreeTrioModel {
     }
 
     return winner;
+  }
+
+  @Override
+  public List<Card> getRedHand() {
+    return List.of();
+  }
+
+  @Override
+  public List<Card> getBlueHand() {
+    return List.of();
   }
 
 
