@@ -205,12 +205,12 @@ public class ThreeTriosModel implements IThreeTrioModel {
 
   @Override
   public List<Card> getRedHand() {
-    return List.of();
+    return redPlayer.getHand();
   }
 
   @Override
   public List<Card> getBlueHand() {
-    return List.of();
+    return bluePlayer.getHand();
   }
 
 
