@@ -3,22 +3,34 @@ package model;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Represents a deck of cards. A deck is a list of cards that can be shuffled and drawn from.
+ */
 public class Deck {
 
   private final List<Card> deck;
 
+  /**
+   * Constructs a deck of cards from a list of cards.
+   * @param filepath
+   * @throws FileNotFoundException
+   */
   public Deck(String filepath) throws FileNotFoundException {
     this.deck = loadCardsFromFile(filepath);
   }
 
 
-  // loads all the cards from a file. The file should be in the following format:
-  // 5 strings, the name, and then the string value of the attack in each direction
-  // name,attackN,attackS,attackE,attackW
+  /**
+   * Constructs a deck of cards from a list of cards.
+   * @param filePath
+   * @return
+   * @throws FileNotFoundException
+   */
   public static List<Card> loadCardsFromFile(String filePath) throws FileNotFoundException {
     List<Card> cards = new ArrayList<>();
 
@@ -42,7 +54,7 @@ public class Deck {
         if (values[i].equals("A")) {
           attackValues.add(10);
         }
-        else if (Integer.parseInt(values[i]) < 0 && Integer.parseInt(values[i]) > 10) {
+        else if (Integer.parseInt(values[i]) > 0 && Integer.parseInt(values[i]) < 10) {
           attackValues.add(Integer.parseInt(values[i]));
         }
         else { // throw exception if the value is not 1-9 or A
@@ -55,14 +67,25 @@ public class Deck {
     return cards;
   }
 
+  /**
+   * Shuffles the deck
+   */
   public void shuffle() {
     Collections.shuffle(deck);
   }
 
+  /**
+   * Returns the deck of cards
+   * @return
+   */
   public List<Card> getDeck() {
     return deck;
   }
 
+  /**
+   * Draws a card from the deck
+   * @return
+   */
   public Card draw() {
     return deck.removeFirst();
   }

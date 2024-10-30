@@ -7,7 +7,7 @@ package model;
  */
 public enum Direction {
 
-  NORTH(0), EAST(1), SOUTH(2), WEST(3);
+  NORTH(0), SOUTH(1), EAST(2), WEST(3);
 
   Direction(int i) {
   }

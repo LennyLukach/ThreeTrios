@@ -2,10 +2,19 @@ CorruptKing 7 3 9 A
 AngryDragon 2 8 9 9
 WindBird 7 2 5 3
 HeroKnight A 2 4 4
-WorldDragon 8 3 5 7
-SkyWhale 4 5 9 9
+WorldDragon 8 3 A 7
+SkyWhale 4 5 A 9
 KingMan 7 3 9 A
 HappyDog 2 8 9 9
 FireBird 7 2 5 3
 GoodNight A 2 4 4
-
+C 7 3 9 A
+A 2 8 9 9
+B 7 2 5 3
+D A 2 4 4
+E 8 3 A 7
+F 4 5 A 9
+G 7 3 9 A
+H 2 8 9 9
+I 7 2 5 3
+J A 2 4 4

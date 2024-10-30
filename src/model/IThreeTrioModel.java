@@ -35,7 +35,7 @@ public interface IThreeTrioModel {
    * @param col   column index of card placed
    * @param color color of player whose turn it is
    */
-  void battle(int row, int col, PlayerColor color);
+  void battle(int row, int col);
 
   /**
    * Checks if the game is over.
@@ -68,4 +68,28 @@ public interface IThreeTrioModel {
    * @return a copy of the list blueHand
    */
   List<Card> getBlueHand();
+
+
+  /**
+   * Gets the current game state.
+   * This could be NOT_STARTED, PLACING, BATTLE, or FINISHED
+   *
+   * @return the game state
+   */
+  GameState getGameState();
+
+  /**
+   * Returns a copy of the current grid.
+   * Changing this grid will have no effect on the game.
+   *
+   * @return the grid
+   */
+  Grid getGrid();
+
+  /**
+   * Returns the current player color.
+   *
+   * @return either PLayerColor RED or BLUE
+   */
+  PlayerColor getCurrentPlayer();
 }

@@ -3,33 +3,52 @@ package model;
 import java.util.List;
 
 
+/**
+ * Represents a card in the game.
+ */
 public class Card {
   private final String name;
   private final List<Integer> attackValues;
   private PlayerColor color;
 
+  /**
+   * Constructs a card with a name, attack values, and color.
+   *
+   * @param name   name of card
+   * @param values attack values of card
+   * @param color  color of card
+   */
   public Card(String name, List<Integer> values, PlayerColor color) {
     this.name = name;
     this.attackValues = values;
     this.color = color;
   }
 
-  // get the name of a card
+  /**
+   * Gets the name of the card.
+   * @return
+   */
   public String getName() {
     return name;
   }
 
-  // get the attack value of a card by putting index for direction: N0, S1, E2, W3
+  /**
+   * Gets the attack value of the card in the given direction.
+   * @param direction
+   * @return
+   */
   public int getAttack(Direction direction) {
     return attackValues.get(direction.ordinal());
   }
 
-  // get the color of a card
+  /**
+   * Gets the color of the card.
+   * @return
+   */
   public PlayerColor getColor() {
     return color;
   }
 
-  // set the color of a card
 
   /**
    * Sets color of card to provided player's color.
@@ -42,4 +61,17 @@ public class Card {
     return this;
   }
 
+  /**
+   * Returns a string representation of the card.
+   *
+   * @return
+   */
+  @Override
+  public String toString() {
+    return this.getName() + " " +
+            this.getAttack(Direction.NORTH) + " " +
+            this.getAttack(Direction.SOUTH) + " " +
+            this.getAttack(Direction.EAST) + " " +
+            this.getAttack(Direction.WEST);
+  }
 }
