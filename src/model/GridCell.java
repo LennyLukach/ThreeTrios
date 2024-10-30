@@ -20,5 +20,6 @@ public class GridCell {
 
   public void setCard(Card card) {
     this.card = card;
+    this.isHole = false;
   }
 }

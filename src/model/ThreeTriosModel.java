@@ -10,6 +10,7 @@ public class ThreeTriosModel implements IThreeTrioModel {
 
   private final Player redPlayer;
   private final Player bluePlayer;
+  private PlayerColor currentPlayer;
   private List<Card> redHand;
   private List<Card> blueHand;
   private Deck deck;
@@ -28,6 +29,7 @@ public class ThreeTriosModel implements IThreeTrioModel {
     this.grid = new Grid(gridFile);
     this.redPlayer = new Player(PlayerColor.RED, redHand);
     this.bluePlayer = new Player(PlayerColor.BLUE, blueHand);
+    this.currentPlayer = PlayerColor.RED;
     gameState = GameState.NOT_STARTED;
   }
 
@@ -85,6 +87,12 @@ public class ThreeTriosModel implements IThreeTrioModel {
     if (gameState != GameState.BATTLE) {
       throw new IllegalStateException("Game is not in battle stage.");
     }
+    if (row < 0 || row >= grid.getGrid().length || col < 0 || col >= grid.getGrid()[0].length) {
+      throw new IllegalArgumentException("Row or Col is out of bounds.");
+    }
+    if (grid.getCard(row, col) == null) {
+      throw new IllegalArgumentException("Cell does not have a card.");
+    }
 
     // check north
     attackNorth(row, col, color);
@@ -117,7 +125,7 @@ public class ThreeTriosModel implements IThreeTrioModel {
     boolean cardExists = grid.getCard(row + 1, col) != null;
     if (cardIsOpponents && cardExists) {
       int attack = grid.getCard(row, col).getAttack(Direction.SOUTH);
-      int defense = grid.getCard(row - 1, col).getAttack(Direction.NORTH);
+      int defense = grid.getCard(row + 1, col).getAttack(Direction.NORTH);
       if (attack > defense) {
         grid.getCard(row + 1, col).setColor(color);
         battle(row + 1, col, color);
@@ -151,10 +159,11 @@ public class ThreeTriosModel implements IThreeTrioModel {
     }
   }
 
+  // added a check to see  if the card is not a hole, it can be null
   public boolean isGameOver() {
     for (int row = 0; row < grid.getGrid().length; row++) {
       for (int col = 0; col < grid.getGrid()[0].length; col++) {
-        if (grid.getCard(row, col) == null) {
+        if (grid.getCard(row, col) == null && !grid.isHole(row, col)) {
           return false;
         }
       }
