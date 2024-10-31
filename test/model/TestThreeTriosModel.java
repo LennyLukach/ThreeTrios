@@ -30,8 +30,8 @@ public class TestThreeTriosModel {
   @Test
   public void testStartingHand() {
     model.startGame();
-    Assert.assertEquals(model.getRedHand().size(), 10);
-    Assert.assertEquals(model.getBlueHand().size(), 10);
+    Assert.assertEquals(model.getRedHand().size(), 15);
+    Assert.assertEquals(model.getBlueHand().size(), 15);
   }
 
 
@@ -53,8 +53,8 @@ public class TestThreeTriosModel {
     Card card = model.getRedHand().get(0);
     String name = card.getName();
     model.placeCard(0, 1, 0, PlayerColor.RED);
-    Assert.assertEquals(model.getRedHand().size(), 9);
-    Assert.assertEquals(model.getBlueHand().size(), 10);
+    Assert.assertEquals(model.getRedHand().size(), 14);
+    Assert.assertEquals(model.getBlueHand().size(), 15);
     Assert.assertEquals(model.getGrid().getCard(0, 1).getName(), name);
   }
 
@@ -245,7 +245,12 @@ public class TestThreeTriosModel {
                     "B 7 2 5 3\n" +
                     "E 8 3 10 7\n" +
                     "G 7 3 9 10\n" +
-                    "I 7 2 5 3", view.toString());
+                    "I 7 2 5 3\n" +
+                    "t 7 3 9 10\n" +
+                    "u 7 2 5 3\n" +
+                    "p 8 3 10 7\n" +
+                    "s 7 3 9 10\n" +
+                    "v 7 2 5 3", view.toString());
   }
 
   // checks that view correctly represents a battle
@@ -271,7 +276,12 @@ public class TestThreeTriosModel {
                     "B 7 2 5 3\n" +
                     "E 8 3 10 7\n" +
                     "G 7 3 9 10\n" +
-                    "I 7 2 5 3", view.toString());
+                    "I 7 2 5 3\n" +
+                    "t 7 3 9 10\n" +
+                    "u 7 2 5 3\n" +
+                    "p 8 3 10 7\n" +
+                    "s 7 3 9 10\n" +
+                    "v 7 2 5 3", view.toString());
   }
 
   // checks that startGame throws when game has already started
@@ -370,5 +380,12 @@ public class TestThreeTriosModel {
   public void testConstructorWithNonExistentGridFile() throws FileNotFoundException {
     new ThreeTriosModel("resources" + File.separator + "testDeck9+1.txt",
             "resources" + File.separator + "nonExistentGrid.txt");
+  }
+
+  @Test
+  public void testDeckTooSmall() throws FileNotFoundException {
+    model = new ThreeTriosModel("resources" + File.separator + "smallDeck.txt",
+            "resources" + File.separator + "grid3x3Holes.txt");
+    model.startGame();
   }
 }
