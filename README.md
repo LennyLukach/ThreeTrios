@@ -31,7 +31,7 @@ A single card would be formatted as such: CARD_NAME NORTH SOUTH EAST WEST.\
 To make a valid deck, you would need at least N+1 cards represented in this way, where N is the
 number of grid cells.
 
-A grid would be formatted as such:\
+A grid would be formatted as such:
 
 5 7\
 CCXXXXC\
